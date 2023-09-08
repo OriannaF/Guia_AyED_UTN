@@ -1,0 +1,29 @@
+Accion Ejercicio2.1.9 Es
+	AMBIENTE
+
+     sec : Secuencia de Caracteres
+     v: Caracter;
+     contI : Entero;                                                                                                                                                          
+	
+	PROCESO
+
+	Esc("Este algoritmo determina la cantidad de palabras que comienzan con I");
+	ARR(sec); AVZ(sec,v);
+
+	contI:= 0;
+	MIENTRAS NFDS(sec) HACER
+
+		MIENTRAS (v = " ") HACER
+			AVZ(sec,v)
+		FM;
+		SI (v = DADA) ENTONCES
+			contI:= contI + 1;
+		FS;
+		MIENTRAS NFDS(sec) ^ (v <> " ") HACER
+			AVZ(sec,v);
+		FM;
+	FM
+	Esc("La cantidad de palabras que empiezan con I es de: " contI);
+	CERRAR(sec);
+
+Fin_Accion.

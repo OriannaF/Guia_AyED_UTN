@@ -1,0 +1,36 @@
+//Hola mi nombre es Orianna.
+//Tengo 19 anios.
+//Soy estudiante de Ingenieria en Sistemas.
+
+Accion Ejercicio 2.1.15 es
+Ambiente
+
+    contadorPalabras: N(100)
+
+    Procedimiento ContPalabras();
+        Ambiente
+            contador: N(100)
+        Algoritmo
+
+            contador:= 0
+
+            Mientras v <> " " Y v <> "." Hacer 
+                Avz(sec,v)
+            Fm;
+
+            contador:= contador + 1 //pq por cada espacio o punto hay una palabra detrás
+        Fa    
+    Fp
+
+
+
+Algoritmo
+    Arr(sec) ; Avz(sec, v)
+
+    Mientras NDFS(sec) Hacer
+        Repetir
+            ContPalabras()
+        Hasta Fs;
+    Fm;
+    
+Fa;
