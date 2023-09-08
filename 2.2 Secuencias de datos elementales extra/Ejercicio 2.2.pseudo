@@ -1,0 +1,23 @@
+Accion Ejercicio 2.2.2 es
+Ambiente
+
+    sec , sN , sL : secuencia de caracter
+    v , vN , vL : caracter
+
+    numeros : { "1" ... "2"}
+    letras : {"A" ... "Z"}
+
+Algoritmo
+    Arr(sec) ; Crear(sN) ; Crear(sL)
+    Avz(sec, v)
+
+    Mientras NFDS(sec) hacer
+        Segun v hacer
+
+            v en letras : Avz(v, sL)
+
+            v en numeros : Avz(v, sN)
+        fs
+    fm
+    Cerrar(sec) ; Cerrar(sL) ; Cerrar(sN)
+Fa
