@@ -1,0 +1,29 @@
+Accion Ej3.2 es
+Ambiente
+    Arr1 : Arreglo [1...100] de entero
+    i,numero,mayorValor, menorValor, posicionValorMenor, posicionValorMayor: entero
+
+Algoritmo
+    //almacenar 100  números
+    Para i:= 1 hasta 100 hacer
+        Esc("Ingrese el numero", i ,":")
+        Leer(numero)
+        Arr1[i] := numero
+    fp
+
+    //Localizar el número de mayor valor y el de menor valor, informar valor y posición
+    mayorValor := Arr1[1]
+    menorValor := Arr1[1]
+
+    Para i:= 1 hasta 100 hacer
+        Si mayorValor < Arr[i] entonces
+            mayorValor := Arr[i]
+            posicionValorMayor := i
+        fs
+        
+        Si menorValor > Arr[i] entonces
+            menorValor := Arr[i]
+            posicionValorMenor := i
+        fs  
+    fp
+fa
