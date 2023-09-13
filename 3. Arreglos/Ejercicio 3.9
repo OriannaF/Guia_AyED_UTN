@@ -1,0 +1,39 @@
+Accion Ejercicio3.9 es
+Ambiente
+
+    Libros = Registro
+        nroLibro : N(6)
+        titulo: AN(30)
+        autor: AN(15)
+        cantHojas: N(6)
+    fr
+
+    A: Arreglo  [1...200] de Libros
+
+    posicionLibro , mayor , i : entero
+    tituloMayor: caracter
+
+Algoritmo
+
+    mayor := 0
+
+    Para i:= 1 hasta 200 hacer
+        Si A[i].autor = "Nicklaus Wirth" entonces
+
+            Si A[i].titulo = “Algoritmos + Estructuras de Datos=Programa” entonces
+                posicionLibro := i
+            Fs
+
+            Si A[i].cantHojas > mayor entonces
+                tituloMayor := A[i].titulo
+                mayor:= A[i].cantHojas
+            Fs
+        
+            Esc("Se posee el libro ", A[i].titulo ,"de Nicklaus Wirth")
+        fs
+    fp
+
+    Esc("El libro de mayor volúmen es : ",tituloMayor," con un total de ",mayor)
+    Esc(" páginas.")
+
+fa
