@@ -1,0 +1,34 @@
+Accion Ejercicio3.5 es 
+Ambiente
+
+    A: arreglo [1 .. 30] de entero
+    B: arreglo [1 .. 30] de entero
+    C: arreglo [1 .. 60] de entero
+
+    
+
+Algoritmo
+
+    Para i:=1 hasta 30 hacer
+        C[i] := A[i]
+        C[i+30] := B[i]
+    Fp
+
+    //Ordenamiento por inserción directa
+    Para i:= 2 a n hacer
+        x := C[i]
+        j := i - 1
+
+        Mientras ( x < C[j] ) Y ( j > 0 )  hacer
+            C[j+1] := C[j]
+            j := j - 1
+        fm
+        
+        C[j + 1 ] := x
+    fp
+
+    Para i:=1 hasta 60 hacer
+        Esc(C[i])
+    Fp
+
+Fa

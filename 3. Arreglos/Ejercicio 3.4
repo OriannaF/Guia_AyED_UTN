@@ -1,0 +1,27 @@
+Accion Ejercicio3.4 es
+Ambiente
+    Arr1: Arreglo [1...50] de entero
+    Arr2: Arreglo [1...50] de entero
+    i,o,cumplen: entero
+Algoritmo
+    cumplen:= 0
+
+    //Modificar el arreglo dado, de modo que todos sus elementos sean múltiplos de 3
+    Para i:= 1 hasta 50 hacer
+
+        Si ( Arr1[i] MOD 3 ) <> 0 entonces
+
+            Arr2[i] := Arr1[i] //guardo el valor q no es mult de 3 en el otro arreglo 
+            Arr1[i] := Arr1[i] + ( 3 - ( Arr1[i] / 3 ) ) //busco multiplo de 3 para el arreglo
+        
+        Sino
+
+            cumplen := cumplen + 1
+
+        Fs
+
+    Fp
+
+    Esc("El total de números que cumplen con la condición es: ", cumplen )
+
+Fa
