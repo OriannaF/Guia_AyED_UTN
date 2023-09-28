@@ -1,0 +1,124 @@
+Accion Ej2.2.19 es
+    Ambiente
+        Fecha = Registro
+            A: N(4)
+            M: 1 ... 12
+            D: 1 ... 30
+        Fr
+
+        Maestro = Registro
+            Clave = Registro
+                Farmacia: N(2)
+                Medicamento: N(5)
+            Fr
+            CantActual: N(6)
+            FechaV: Fecha
+        Fr
+
+        archMae, archSal : archivo de Maestro odenado por clave
+        regMae, regSal: Maestro
+
+        Movimiento = Registro
+            Clave = Registro
+                Farmacia: N(2)
+                Medicamento: N(5)
+            Fr
+            CodMod: N(8)
+            CantRecibida: N(10)
+        Fr
+
+        archMov : archivo de Movimiento ordenado por clave
+        regMov: Movimiento
+
+        RemVencidos = Registro
+            Medicamento: N(5)
+            CantVencida: N(6)
+        Fr
+
+        archVen: archivo de RemVencidos ordenado por Medicamento
+        regVen: RemVencidos
+
+        Procedimiento LeerMaestro() es
+            Leer(archMae, regMae)
+            Si FDA(archMae) entonces
+                regMae.clave := HV
+            Fs
+        Fp
+
+        Procedimiento LeerMovimiento() es
+            Leer(archMov, regMov)
+            Si FDA(archMov) entonces
+                regMov.clave := HV
+            Fs
+        Fp
+
+        Procedimiento Arrancar() es
+            Abrir E/(archMae) ; Abrir E/(archMov)
+            Abrir /S(archSal) ; Abrir /S(archVen)
+            LeerMaestro() ; LeerMovimiento()
+        Fp
+
+        Procedimiento CerrarArchivos() es
+            CERRAR(archMae); CERRAR(archMov);
+            CERRAR(archSal); CERRAR(archVen);
+        Fp
+    
+    Algoritmo
+
+    Arrancar()
+
+    Mientras (archMae <> HV) Y (archMov <> HV) hacer
+        Si regMae.clave < regMov.clave entonces
+
+            regSal := regMae
+            Esc(archSal,regSal)
+            LeerMaestro()
+
+            Sino
+
+                Si regMae.Clave = regMov.clave entonces
+
+                    Segun regMov.codMod hacer
+                        1: Esc("Error")
+
+                        2: 
+                        regVen.Medicamento := regMov.Clave.Movimiento
+                        regVen.CantVencida := regMov.CantRecibida
+                        Esc(archVen, regVen)
+
+                        3: 
+                        regSal := regMae
+                        regSal.CantActual := regMae.CantActual + regMov.CantRecibida
+                        Esc(archSal, regSal)
+                    Fs
+
+                    LeerMaestro() ; LeerMovimiento()
+                Fs
+
+            Sino
+
+                Si regMae.Clave > regMov.Clave entonces
+
+                    Segun regMov.CodMod hacer
+
+                        1: //vademecum	
+                        regSal.Clave.Farmacia := regMov.Clave.Farmacia
+                        regSal.Clave.Medicamento := regMov.Clave.Medicamento
+                        regSal.CantActual := regMov.CantRecibida
+                        regSal.FechaV := regMae.fecha.dia + 30
+                        Esc(archSal, regSal)
+                        
+
+                        2: Esc("Error")
+
+                        3: Esc("Error :(")
+                    Fs
+                Fs
+
+                LeerMovimiento()
+        Fs
+    Fm
+
+    CerrarArchivos()
+
+FA
