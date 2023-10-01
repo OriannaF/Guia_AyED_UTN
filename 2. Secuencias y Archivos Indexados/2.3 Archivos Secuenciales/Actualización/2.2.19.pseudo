@@ -82,8 +82,8 @@ Accion Ej2.2.19 es
                         1: Esc("Error")
 
                         2: 
-                        regVen.Medicamento := regMov.Clave.Movimiento
-                        regVen.CantVencida := regMov.CantRecibida
+                        regVen.Medicamento := regMae.Clave.Medicamento
+                        regVen.CantVencida := regMae.CantRecibida
                         Esc(archVen, regVen)
 
                         3: 

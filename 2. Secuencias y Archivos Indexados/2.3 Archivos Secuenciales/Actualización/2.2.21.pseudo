@@ -1,0 +1,122 @@
+Accion Ej2.2.21 es
+Ambiente
+    fecha = Registro
+        D: 1...31
+        M: 1..12
+        A: N(4)
+    fr
+
+    Maestro = Registro
+        Clave = registro
+            codUsuario: N(8)
+            codAmigo: N(8)
+        fr
+        fechaAmistad: fecha
+        mensajeMuro: AN(20)
+    fr
+
+    MaestroS = Registro
+        Clave = registro
+            codUsuario: N(8)
+            codAmigo: N(8)
+        fr
+        fechaAmistad: fecha
+        mensajeMuro: AN(20)
+    fr
+
+    archMae: archivo de Maestro ordenado por clave
+    archMaeS: archivo de MaestroS ordenado por clave
+    regMae: Maestro
+    regMaeS: MaestroS
+
+    Movimiento = Registro
+        Clave = registro
+            codUsuario: N(8)
+            codAmigo: N(8)
+            codMovimiento: { "A","B","M" } 
+        fr
+        fechaAmistad: fecha
+        mensajeMuro: AN(20)
+    Fr
+
+    archMov: archivo de Notificaciones ordenado por clave
+    regMov: Movimiento
+
+    Procedimiento LeerMaestro() es
+        Leer(archMae,regMae)
+        Si FDA(archMae) entonces
+            regMae.clave := HV
+        fs
+    fp
+
+    Procedimiento LeerMovimiento() es
+        Leer(archMov,regMov)
+        Si FDA(archMov) entonces
+            regMov.clave := HV
+        fs
+    fp
+
+    Procedimiento Arrancar() es
+        Abrir E/(archMae) ; Abrir E/(archMov)
+        Abrir /S(archMaeS)
+    fp
+
+   
+ALgoritmos
+
+    Arrancar()
+    LeerMaestro() ; LeerMovimiento()
+
+
+    Mientras (archMae <> HV) Y (archMov <> HV) hacer
+        Si regMae.clave < regMov.clave entonces
+
+            regMaeS := regMae
+            Esc(regMaeS,regMaeS)
+            LeerMaestro()
+        
+            sino
+
+            Si regMae.clave = regMov.clave
+
+                Segun regMov.Clave.codMovimiento
+
+                    "A" : Esc("Error solicitud inválida")
+                    regMaeS := regMae
+                    Esc(archMaeS,regMaeS)
+
+                    "B" : Esc("Amigo eliminado",regMae.clave.codAmigo)
+                    //en actualización secuencial no se puede borrar físicamente,
+                    //solo se pude avanzar
+
+                    "M"  regMae.mensajeMuro := regMov.mensajeMuro
+                    regSal := regMov
+                    Esc(archSal,regSal)
+
+                fs
+
+                LeerMovimiento() ; LeerMaestro()
+
+                sino //regMae.clave > regMov.clave
+
+                Segun regMov.Clave.codMovimiento hacer
+
+                    "A" : regMaeS.Clave.codUsuario := regMov.Clave.codUsuario 
+                    regMaeS.Clave.codAmigo := regMov.Clave.codAmigo
+                    regMaeS.fechaAmistad := regMov.fechaAmistad
+                    regMaeS.mensajeMuro := regMov.mensajeMuro 
+                    Esc(archMaeS,regSal)
+
+                    "B" : Esc("Baja inválida")
+
+                    "M" : Esc("Modificación Inválida")
+
+                fs
+
+                LeerMovimiento()
+
+            fs
+
+        fs
+    Fm
+Fa
